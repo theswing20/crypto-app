@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <Input />
+    </div>
+
+    <Chart />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+  import Input from '@/components/Input'
+  import Chart from '@/components/Chart'
 
-export default {
+  export default {
   name: 'Home',
   components: {
-    HelloWorld
+    Input,
+    Chart
+  },
+
+    async mounted() {
+      this.$store.dispatch('getAllCoins')
+      await this.$store.dispatch('calculateIntervalDate')
+      this.$store.dispatch('getSelectedCoin', this.$route.params.cryptoName)
+    }
   }
-}
 </script>
+
+<style>
+  .container {
+    width: 1200px;
+
+    margin: 0 auto;
+  }
+</style>
