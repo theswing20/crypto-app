@@ -25,8 +25,6 @@ export default new Vuex.Store({
         })
       }
 
-      console.log(arr)
-
       return arr
     })
   },
@@ -61,7 +59,6 @@ export default new Vuex.Store({
     getSelectedCoin({commit, state}, crytoName) {
       axios.get(`https://api.coincap.io/v2/assets/${crytoName}/history?interval=d1&start=${state.intervalDate.weekAgo}&end=${state.intervalDate.currentDate}`)
           .then((res) => {
-            console.log(res.data)
             commit('setCharts', res.data)
             commit('setSelectedCrypto', crytoName)
           })
